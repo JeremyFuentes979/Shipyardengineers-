@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Line Safety Tech &mdash; Safety Action Plans &amp; SOPs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0f172a;
+      --navy-light: #1e293b;
+      --red: #d60000;
+      --red-dark: #b00000;
+      --red-light: rgba(214, 0, 0, 0.08);
+      --white: #f8fafc;
+      --off-white: #e2e8f0;
+      --steel: #94a3b8;
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.6;
+    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100; padding: 16px 0;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
+    .logo-shield { color: var(--red); margin-right: 6px; }
+    .logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { color: var(--steel); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--red); color: white; padding: 8px 20px;
+      border-radius: 8px; font-weight: 600; font-size: 0.88rem; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--red-dark); }
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      background: linear-gradient(135deg, var(--navy) 0%, #1a1f35 50%, var(--navy-light) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(214, 0, 0, 0.06) 0%, transparent 70%);
+      top: -200px; right: -200px;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--red-light);
+      color: #ff4444;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      border: 1px solid rgba(214, 0, 0, 0.2);
+    }
+    .hero h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.03em; }
+    .hero h1 span { color: var(--red); }
+    .hero p { font-size: 1.1rem; color: var(--steel); max-width: 560px; margin-bottom: 36px; line-height: 1.7; }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--red); color: white;
+      padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem;
+      text-decoration: none; transition: all 0.2s; display: inline-block;
+      border: 2px solid var(--red);
+    }
+    .btn-primary:hover { background: var(--red-dark); border-color: var(--red-dark); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent; color: var(--white);
+      padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem;
+      text-decoration: none; transition: all 0.2s; display: inline-block;
+      border: 2px solid rgba(148, 163, 184, 0.3);
+    }
+    .btn-secondary:hover { border-color: var(--steel); transform: translateY(-2px); }
+    section { padding: 100px 0; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--red); font-size: 0.8rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .section-title { font-size: 2.4rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.02em; }
+    .section-desc { color: var(--steel); font-size: 1.05rem; max-width: 600px; margin-bottom: 56px; }
+    .what-we-do { background: var(--navy-light); }
+    .wwd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .wwd-card {
+      background: var(--navy);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      transition: all 0.3s;
+    }
+    .wwd-card:hover { border-color: var(--red); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+    .wwd-icon {
+      width: 52px; height: 52px;
+      background: var(--red-light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; font-size: 1.5rem;
+    }
+    .wwd-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; }
+    .wwd-card p { color: var(--steel); font-size: 0.9rem; line-height: 1.7; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; }
+    .steps::before {
+      content: ''; position: absolute; top: 44px; left: 15%; right: 15%;
+      height: 2px; background: linear-gradient(to right, var(--red), var(--steel), var(--red));
+      opacity: 0.15;
+    }
+    .step { text-align: center; position: relative; }
+    .step-number {
+      width: 56px; height: 56px;
+      background: var(--red); color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; font-weight: 800;
+      margin: 0 auto 24px;
+      position: relative; z-index: 2;
+    }
+    .step h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; }
+    .step p { color: var(--steel); font-size: 0.9rem; line-height: 1.7; max-width: 280px; margin: 0 auto; }
+    .features { background: var(--navy-light); }
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .feature {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: var(--navy);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: all 0.3s;
+    }
+    .feature:hover { border-color: rgba(214, 0, 0, 0.3); }
+    .feature-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+    .feature h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .feature p { color: var(--steel); font-size: 0.88rem; line-height: 1.6; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .about-content h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; }
+    .about-content p { color: var(--steel); font-size: 0.95rem; line-height: 1.7; margin-bottom: 16px; }
+    .about-highlight {
+      background: var(--navy-light);
+      border-radius: var(--radius);
+      padding: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .about-highlight h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: var(--red); }
+    .about-highlight ul { list-style: none; }
+    .about-highlight li {
+      color: var(--steel); font-size: 0.9rem; padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .about-highlight li:last-child { border-bottom: none; }
+    .about-highlight li::before { content: '✓ '; color: var(--red); font-weight: 700; }
+    .contact { background: var(--navy-light); }
+    .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .contact-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+    .contact-info p { color: var(--steel); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px; }
+    .contact-detail { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; color: var(--steel); }
+    .contact-detail a { color: var(--red); text-decoration: none; }
+    .contact-detail a:hover { text-decoration: underline; }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-form input,
+    .contact-form textarea {
+      background: var(--navy);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--red); }
+    .contact-form textarea { min-height: 120px; resize: vertical; }
+    .contact-form button {
+      background: var(--red); color: white;
+      padding: 14px 28px; border: none; border-radius: 8px;
+      font-weight: 600; font-size: 1rem;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .contact-form button:hover { background: var(--red-dark); }
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+      color: var(--steel);
+      font-size: 0.85rem;
+    }
+    footer .logo { margin-bottom: 8px; }
+    @media (max-width: 768px) {
+      nav .container { flex-direction: column; gap: 12px; }
+      .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .wwd-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; gap: 40px; }
+      .steps::before { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-content { grid-template-columns: 1fr; }
+      .section-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div class="logo"><span class="logo-shield">&#9733;</span>First Line <span>Safety Tech</span></div>
+      <div class="nav-links">
+        <a href="#what-we-do">What We Do</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-cta">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">&#9733; Professional safety documentation for small businesses</div>
+        <h1>Create safety action plans &amp; printable<br><span>SOPs in minutes</span></h1>
+        <p>Stop wrestling with complicated safety paperwork. Choose a template, customize it, and print professional-grade safety documents &mdash; no expertise required.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn-primary">Get Started Free</a>
+          <a href="#what-we-do" class="btn-secondary">Learn More &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="what-we-do" id="what-we-do">
+    <div class="container">
+      <div class="section-label">&#9733; What We Do</div>
+      <h2 class="section-title">Safety documents made simple</h2>
+      <p class="section-desc">We help businesses create professional safety action plans and Standard Operating Procedures &mdash; fast, without the headache.</p>
+      <div class="wwd-grid">
+        <div class="wwd-card">
+          <div class="wwd-icon">&#128221;</div>
+          <h3>Safety Action Plans</h3>
+          <p>Generate comprehensive safety action plans tailored to your business. Identify hazards, outline controls, and meet compliance requirements &mdash; all from ready-made templates.</p>
+        </div>
+        <div class="wwd-card">
+          <div class="wwd-icon">&#128196;</div>
+          <h3>Printable SOPs</h3>
+          <p>Professional Standard Operating Procedures formatted for print. Clear step-by-step instructions your team can follow, in a consistent, branded format.</p>
+        </div>
+        <div class="wwd-card">
+          <div class="wwd-icon">&#128295;</div>
+          <h3>Custom Templates</h3>
+          <p>Start with industry-standard templates and customize them to your business. Edit wording, add your logo, adjust procedures &mdash; no design skills needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works">
+    <div class="container">
+      <div class="section-label">&#9733; Our Process</div>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-desc">Three simple steps from idea to print-ready safety documents.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Choose a Template</h3>
+          <p>Browse our library of pre-built safety action plan and SOP templates. Pick the one that matches your business needs.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Customize</h3>
+          <p>Edit the template to fit your specific operations. Add your company info, update procedures, and tailor the content to your workplace.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Download &amp; Print</h3>
+          <p>Export your finished document as a professional PDF. Print it, share it, or keep it on file &mdash; you're ready for compliance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-label">&#9733; Features</div>
+      <h2 class="section-title">Everything you need</h2>
+      <p class="section-desc">Built for small businesses that need professional safety documentation without the complexity.</p>
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">&#128203;</div>
+          <div>
+            <h3>Pre-built Templates</h3>
+            <p>Industry-standard safety document templates ready to use. No starting from scratch &mdash; just pick and customize.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&#9998;</div>
+          <div>
+            <h3>Easy Editing</h3>
+            <p>Simple online editor. Change text, add sections, update procedures &mdash; works like a word processor, no training needed.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&#128424;</div>
+          <div>
+            <h3>Print-Ready</h3>
+            <p>Every document is formatted for professional printing. Consistent layout, clean typography, ready to go.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&#10004;</div>
+          <div>
+            <h3>Compliance-Ready</h3>
+            <p>Templates built with industry regulations in mind. A solid foundation to meet your safety documentation obligations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-label">&#9733; About Us</div>
+      <h2 class="section-title">Why First Line Safety Tech?</h2>
+      <p class="section-desc">We built this for small businesses that don't have a dedicated safety team.</p>
+      <div class="about-grid">
+        <div class="about-content">
+          <h3>Safety documentation shouldn't be complicated</h3>
+          <p>Most small businesses know they need safety action plans and SOPs, but the process is overwhelming. Expensive consultants, confusing regulations, and hours of paperwork.</p>
+          <p>We make it simple. Professional templates, easy editing, and print-ready documents &mdash; so you can focus on running your business, not wrestling with paperwork.</p>
+          <p>No legal expertise required. No expensive software. Just clear, professional safety documentation in minutes.</p>
+        </div>
+        <div class="about-highlight">
+          <h3>Built for small businesses</h3>
+          <ul>
+            <li>No legal or regulatory expertise needed</li>
+            <li>Fast turnaround &mdash; documents in minutes, not days</li>
+            <li>Professional quality your team and inspectors will trust</li>
+            <li>Affordable pricing &mdash; no consultants or retainers</li>
+            <li>Printable PDFs ready for filing and sharing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-label">&#9733; Get in Touch</div>
+      <h2 class="section-title">Ready to get started?</h2>
+      <p class="section-desc">Tell us about your business and we'll help you find the right templates. No commitment, no hassle.</p>
+      <div class="contact-content">
+        <div class="contact-info">
+          <h3>Prefer email?</h3>
+          <p>Send us a message directly and we'll get back to you within 24 hours.</p>
+          <div class="contact-detail">&#9993; <a href="mailto:hello@firstlinesafetytech.com">hello@firstlinesafetytech.com</a></div>
+          <div class="contact-detail">&#9200; Response time: &lt; 24 hours</div>
+          <div class="contact-detail">&#128179; Simple pricing &mdash; no hidden fees</div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <input type="text" placeholder="Name" required>
+          <input type="email" placeholder="Email" required>
+          <input type="text" placeholder="Business name">
+          <textarea placeholder="Tell us about your business and what safety documents you need..." required></textarea>
+          <button type="submit">Send Message &rarr;</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="logo"><span class="logo-shield">&#9733;</span>First Line <span>Safety Tech</span></div>
+      <p>Safety action plans &amp; printable SOPs for small businesses.</p>
+      <p style="margin-top: 8px; font-size: 0.8rem;">&copy; 2026 First Line Safety Tech</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thanks for reaching out! We\'ll be in touch within 24 hours. \u2014 First Line Safety Tech');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
